@@ -1,0 +1,105 @@
+vector的头文件 #include <vector>
+属于名字空间std
+
+vector是template编程，可以使用vector<int> v;创建一个容器
+
+末尾插入元素
+v.push_back(2); // 默认元素最大为32字节，可进行两次*2扩大内存至128
+
+末尾删除元素
+v.pop_back();
+
+赋值
+v2.assign(v1.begin(), v1.end()); // 讲v1的所有元素赋值给v2
+v2.assign(4, 5); // 向v2中插入五个元素，每个元素的数值为4
+
+
+获取某个位置的元素
+v2[2];  //并不会检查是否越界
+v2.at(2);//以上两者的区别就是at会检查是否越界，是则抛出out of range异常
+
+vector的正序迭代器类型
+vector<int>::iterator
+vector的逆序迭代器类型
+vector<int>::reverse_iterator
+
+v的首个元素
+v.begin();  
+v.rend();
+v的最后一个元素
+v.end();
+v.rbegin();
+
+cbegin 
+Return const_iterator to beginning (public member function )
+cend 
+Return const_iterator to end (public member function )
+crbegin 
+Return const_reverse_iterator to reverse beginning (public member function )
+crend 
+Return const_reverse_iterator to reverse end (public member function )
+
+容器可以容纳数据的个数（但是不一定有这么多元素）, 增长方式为*2
+v.capacity(); 
+
+当前容器内元素的大小
+v.size();
+c.resize(num)重新指定队列的长度。（往往用来增加vector的长度,小->大 ok 大->小 没用！会初始化元素为0）
+resize函数可以有两个参数，第一个参数是容器新的大小，第二个参数是要加入容器中的新元素，如果这个参数被省略，那么就调用元素对象的默认构造函数。
+c.reserve()保留适当的容量。
+c.max_size()返回容器能容量的最大数量。
+shrink_to_fit 
+Shrink to fit (public member function ) 可以缩小vector的大小
+
+清除所有的元素
+v.clear();
+
+判断是否为空
+v.empty();
+
+删除元素, 并返回下一个元素的iterator
+v.erase(v.begin());
+v.erase(v.begin(), v.begin()+1);
+
+
+v.front(); // 返回首个元素
+v.back(); // 返回最后一个元素
+(均不检查是否有元素存在)
+
+c.insert(pos,elem) 在pos位置插入一个elem的拷贝,返回插入的值的迭代器。
+c.insert(pos,n,elem)在pos位置插入n个elem的数据,无返回值。
+c.insert(pos,beg,end)在pos位置插入在[beg,end)区间的数据,无返回值。
+emplace 
+Construct and insert element (public member function ) 在特定位置插入元素，并返回插入位置的迭代器
+emplace_back 
+Construct and insert element at the end (public member function ) 在末尾插入元素
+
+
+c1.swap(c2)将c1和c2交换。
+swap(c1,c2)同上。
+
+
+
+
+vector<type>c;创建一个空的vector容器。
+vector<type> c1(c2);复制一个vector。
+vector<type> c(n);创建一个vector,含有n个数据，数据均以缺省构造产生,即全0；
+vector<type> c(n,elem)创建一个vector,含有n个elem的拷贝数据。
+vector<type> c(beg,end)创建一个以[beg,end)区间的vector。
+~vector<type>()   销毁所有数据,施放内存。
+
+
+元素翻转
+#include <algorithm>
+reverse(vec.begin(), vec.end());
+
+元素排序
+#include <algorithm>
+sort(vec.begin(), vec.end()); //采用的是从小到大的排序
+//如果想从大到小排序，可以采用上面反转函数，也可以采用下面方法:
+bool Comp(const int& a, const int& b) {
+	return a > b;
+}
+sort(vec.begin(), vec.end(), Comp);
+
+
